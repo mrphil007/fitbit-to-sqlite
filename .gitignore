@@ -1,7 +1,11 @@
 *.db
 *.zip
+*.twb
 .DS_Store
 .venv
+tmp/*
+build/*
+dist/*
 __pycache__/
 *.py[cod]
 *$py.class
