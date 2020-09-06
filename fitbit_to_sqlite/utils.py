@@ -21,7 +21,7 @@ def save_resting_heart_rates(db, zf, heart_rates):
 
 
 def save_distances(db, zf, distances):
-    
+
     for filename in distances:
         distance = json.load(zf.open(filename))
         db["distance"].upsert_all(
@@ -35,4 +35,3 @@ def save_distances(db, zf, distances):
             pk="dateTime",
             columns={"dateTime": str, "value": int}
         )
-

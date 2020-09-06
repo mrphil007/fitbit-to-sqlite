@@ -55,4 +55,3 @@ def resting_heart_rate(db_path, zip_path):
     ]
     with click.progressbar(distances, label="Loading distance data") as bar:
         utils.save_distances(db, zf, bar)
-
