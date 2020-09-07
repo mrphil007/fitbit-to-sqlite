@@ -99,6 +99,35 @@ def save_very_active_minutes(db, zf, very_active_minutes):
         )
 
 
+def save_exercise(db, zf, exercise):
+    for filename in exercise:
+        exercise = json.load(zf.open(filename))
+        db["exercise"].upsert_all(
+            (
+                {
+                    "date": datetime.datetime.strptime(row["startTime"], "%m/%d/%y %H:%M:%S").date(),
+                    "start_time": datetime.datetime.strptime(row["startTime"], "%m/%d/%y %H:%M:%S"),
+                    "activity_type": row["activityName"],
+                    "log_type": row["logType"],
+                    "duration": row["activeDuration"],
+                    "average_heart_rate": row["averageHeartRate"] if "averageHeartRate" in row else None,
+                    "steps": row["steps"] if "steps" in row else None,
+                    "sedentary_minutes": row["activityLevel"][0]["minutes"],
+                    "lightly_active_minutes": row["activityLevel"][1]["minutes"],
+                    "fairly_active_minutes": row["activityLevel"][2]["minutes"],
+                    "very_active_minutes": row["activityLevel"][3]["minutes"],
+                    "out_of_zones_minutes": row["heartRateZones"][0]["minutes"] if "heartRateZones" in row else None,
+                    "fat_burn_minutes": row["heartRateZones"][1]["minutes"] if "heartRateZones" in row else None,
+                    "cardio_minutes": row["heartRateZones"][2]["minutes"] if "heartRateZones" in row else None,
+                    "peak_minutes": row["heartRateZones"][3]["minutes"] if "heartRateZones" in row else None,
+                    "distance": row["distance"] if "distance" in row else None
+                }
+                for row in exercise
+            ),
+            pk="start_time"
+        )
+
+
 def create_views(db):
     for name, sql in (
         (

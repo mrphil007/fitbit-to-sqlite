@@ -30,6 +30,12 @@ You can import data on your activity minutes, which Fitbit classifies into `Sede
 
     $ fitbit-to-sqlite minutes-active fitbit.db MyFitbitData.zip
 
+## Exercise
+
+You can import data on your exercise activities using the following command. Note that this imports a subset of all fields.
+
+    $ fitbit-to-sqlite exercise fitbit.db MyFitbitData.zip
+
 ## Browsing your data with Datasette
 
 Once you have imported Fitbit data into a SQLite database file you can browse your data using [Datasette](https://github.com/simonw/datasette). Install Datasette like so:

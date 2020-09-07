@@ -8,7 +8,7 @@ from . import utils
 @click.group()
 @click.version_option()
 def cli():
-    "Save FitBit data to a SQLite database"
+    "Save Fitbit data to a SQLite database"
 
 
 @cli.command(name="resting-heart-rate")
@@ -58,6 +58,7 @@ def resting_heart_rate(db_path, zip_path):
     # Add view on distance data
     utils.create_views(db)
 
+
 @cli.command(name="minutes-active")
 @click.argument(
     "db_path",
@@ -99,3 +100,26 @@ def minutes_active(db_path, zip_path):
         utils.save_very_active_minutes(db, zf, bar)
     # Create analysis view
     utils.create_views(db)
+
+
+@cli.command(name="exercise")
+@click.argument(
+    "db_path",
+    type=click.Path(file_okay=True, dir_okay=False, allow_dash=False),
+    required=True,
+)
+@click.argument(
+    "zip_path",
+    type=click.Path(file_okay=True, dir_okay=False, allow_dash=False),
+    required=True,
+)
+def exercise(db_path, zip_path):
+    "Save data on Exercise activities from Takeout zip to SQLite"
+    db = sqlite_utils.Database(db_path)
+    zf = zipfile.ZipFile(zip_path)
+    # Find relevant exercise files
+    exercise = [
+        f.filename for f in zf.filelist if "exercise" in f.filename
+    ]
+    with click.progressbar(exercise, label="Loading exercise data") as bar:
+        utils.save_exercise(db, zf, bar)

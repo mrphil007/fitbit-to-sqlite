@@ -11,4 +11,5 @@ def test_create_zip():
         "lightly_active_minutes.json",
         "moderately_active_minutes.json",
         "very_active_minutes.json",
+        "exercise.json",
     } == {f.filename for f in zf.filelist}
