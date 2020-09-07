@@ -40,3 +40,7 @@ Now browse your data by running this and then visiting `http://localhost:8001/`
 
     $ datasette fitbit.db
 
+## Thanks
+
+This package is heavily inspired by the interesting work on [Personal Analytics](https://simonwillison.net/2019/Oct/7/dogsheep/) which [Simon
+Willison](https://dogsheep.github.io/) has been doing.
