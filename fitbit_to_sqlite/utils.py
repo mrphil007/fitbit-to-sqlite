@@ -97,3 +97,40 @@ def save_very_active_minutes(db, zf, very_active_minutes):
             pk="date",
             columns={"date": str, "value": int}
         )
+
+
+def create_views(db):
+    for name, sql in (
+        (
+            "minutes_active_v",
+            """
+SELECT
+    'sendentary'  AS minutes_type,
+    d.*
+FROM
+    sedentary_minutes d
+UNION ALL
+SELECT
+    'lightly_active'  AS minutes_type,
+    d.*
+FROM
+    lightly_active_minutes d
+UNION ALL
+SELECT
+    'moderately_active'  AS minutes_type,
+    d.*
+FROM
+    moderately_active_minutes d
+UNION ALL
+SELECT
+    'very_active'  AS minutes_type,
+    d.*
+FROM
+    very_active_minutes d
+        """,
+        ),
+    ):
+        try:
+            db.create_view(name, sql)
+        except Exception:
+            pass

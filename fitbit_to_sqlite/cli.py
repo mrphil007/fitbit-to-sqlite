@@ -96,3 +96,5 @@ def minutes_active(db_path, zip_path):
     ]
     with click.progressbar(very_active_minutes, label="Loading very active minutes data") as bar:
         utils.save_very_active_minutes(db, zf, bar)
+    # Create analysis view
+    utils.create_views(db)

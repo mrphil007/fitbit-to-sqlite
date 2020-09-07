@@ -26,7 +26,7 @@ You can import data on the distance you have travelled each minute of each day b
 
 ## Minutes Active
 
-You can import data on your activity minutes, which Fitbit classifies into `Sedentary`, `Lightly Active`, `Moderately Active` and `Very Active` using the following command. Note that this creates separate database tables for each which can be combined with a view.
+You can import data on your activity minutes, which Fitbit classifies into `Sedentary`, `Lightly Active`, `Moderately Active` and `Very Active` using the following command. Note that this creates separate database tables for each, but are also combined together into a view for analysis called `minutes_active_v`.
 
     $ fitbit-to-sqlite minutes-active fitbit.db MyFitbitData.zip
 
