@@ -55,7 +55,8 @@ def resting_heart_rate(db_path, zip_path):
     ]
     with click.progressbar(distances, label="Loading distance data") as bar:
         utils.save_distances(db, zf, bar)
-
+    # Add view on distance data
+    utils.create_views(db)
 
 @cli.command(name="minutes-active")
 @click.argument(

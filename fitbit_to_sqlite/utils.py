@@ -102,6 +102,21 @@ def save_very_active_minutes(db, zf, very_active_minutes):
 def create_views(db):
     for name, sql in (
         (
+            "distance_v",
+            """
+SELECT
+    d.dateTime               AS date_time,
+    DATE(d.dateTime)         AS date,
+    -- Distance is in cm, convert to km
+    CAST(d.value AS FLOAT)/100000 AS distance_km,
+    -- Approximate conversation of km to m
+    CAST(d.value AS FLOAT)/100000/1.609344  AS distance_miles
+FROM
+    distance d
+            """,
+
+        ),
+        (
             "minutes_active_v",
             """
 SELECT

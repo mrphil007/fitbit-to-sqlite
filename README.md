@@ -20,7 +20,7 @@ This will create a database file called `fitbit.db` if one does not already exis
 
 ## Distance
 
-You can import data on the distance you have travelled each minute of each day by using this command:
+You can import data on the distance you have travelled each minute of each day by using the following command. Note that this also creates an analysis view called `distance_v` which converts the distances to km and miles.
 
     $ fitbit-to-sqlite distance fitbit.db MyFitbitData.zip
 
