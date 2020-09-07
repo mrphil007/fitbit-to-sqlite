@@ -14,7 +14,7 @@ def get_long_description():
 
 setup(
     name="fitbit-to-sqlite",
-    description="Save data from FitBit Takeout to an SQLite database",
+    description="Save data from Fitbit Takeout to an SQLite database",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     author="Phil Rossiter",
