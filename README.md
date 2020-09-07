@@ -8,7 +8,7 @@ Save data from Fitbit Takeout to an SQLite database.
 
 Request your Fitbit data from the `Export Your Account Archive`  section from this page https://www.fitbit.com/settings/data/export - wait for the email and download the zip file.
 
-This tool only supports a subset of the available options. More will be added over time.
+This tool only supports a subset of the available data sources. More will be added over time.
 
 ## Resting Heart Rate
 
