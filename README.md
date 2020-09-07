@@ -1,6 +1,6 @@
 # fitbit-to-sqlite
 
-Save data from FitBit Takeout to an SQLite database.
+Save data from Fitbit Takeout to an SQLite database.
 
 ## How to install
 
@@ -23,6 +23,12 @@ This will create a database file called `fitbit.db` if one does not already exis
 You can import data on the distance you have travelled each minute of each day by using this command:
 
     $ fitbit-to-sqlite distance fitbit.db MyFitbitData.zip
+
+## Minutes Active
+
+You can import data on your activity minutes, which Fitbit classifies into `Sedentary`, `Lightly Active`, `Moderately Active` and `Very Active` using the following command. Note that this creates separate database tables for each which can be combined with a view.
+
+    $ fitbit-to-sqlite minutes-active fitbit.db MyFitbitData.zip
 
 ## Browsing your data with Datasette
 
