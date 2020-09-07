@@ -51,7 +51,7 @@ def resting_heart_rate(db_path, zip_path):
     zf = zipfile.ZipFile(zip_path)
     # Find all the relevant distance files
     distances = [
-        f.filename for f in zf.filelist if "distance-2020" in f.filename
+        f.filename for f in zf.filelist if "distance" in f.filename
     ]
     with click.progressbar(distances, label="Loading distance data") as bar:
         utils.save_distances(db, zf, bar)
