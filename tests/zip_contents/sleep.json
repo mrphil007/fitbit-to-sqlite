@@ -1,0 +1,71 @@
+[{
+  "logId" : 17386918523,
+  "dateOfSleep" : "2018-02-02",
+  "startTime" : "2018-02-01T22:36:00.000",
+  "endTime" : "2018-02-02T06:42:00.000",
+  "duration" : 29160000,
+  "minutesToFallAsleep" : 0,
+  "minutesAsleep" : 452,
+  "minutesAwake" : 34,
+  "minutesAfterWakeup" : 15,
+  "timeInBed" : 486,
+  "efficiency" : 68,
+  "type" : "stages",
+  "infoCode" : 0,
+  "levels" : {
+    "summary" : {
+      "deep" : {
+        "count" : 6,
+        "minutes" : 137,
+        "thirtyDayAvgMinutes" : 96
+      },
+      "wake" : {
+        "count" : 28,
+        "minutes" : 34,
+        "thirtyDayAvgMinutes" : 54
+      },
+      "light" : {
+        "count" : 25,
+        "minutes" : 209,
+        "thirtyDayAvgMinutes" : 244
+      },
+      "rem" : {
+        "count" : 9,
+        "minutes" : 106,
+        "thirtyDayAvgMinutes" : 102
+      }
+    }
+  },
+  "mainSleep" : true
+},{
+  "logId" : 17243952890,
+  "dateOfSleep" : "2018-02-03",
+  "startTime" : "2018-02-02T22:27:30.000",
+  "endTime" : "2018-02-03T06:57:30.000",
+  "duration" : 30600000,
+  "minutesToFallAsleep" : 0,
+  "minutesAsleep" : 312,
+  "minutesAwake" : 198,
+  "minutesAfterWakeup" : 0,
+  "timeInBed" : 510,
+  "efficiency" : 61,
+  "type" : "classic",
+  "infoCode" : 3,
+  "levels" : {
+    "summary" : {
+      "restless" : {
+        "count" : 18,
+        "minutes" : 195
+      },
+      "awake" : {
+        "count" : 1,
+        "minutes" : 3
+      },
+      "asleep" : {
+        "count" : 0,
+        "minutes" : 312
+      }
+    }
+  },
+  "mainSleep" : true
+}]

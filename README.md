@@ -39,6 +39,12 @@ You can import data on your exercise activities using the following command. Not
 
     $ fitbit-to-sqlite exercise fitbit.db MyFitbitData.zip
 
+## Sleep
+
+You can import sleep log data using the following command. Note that some fields are only populated for sleep captured in `stages`.
+
+    $ fitbit-to-sqlite sleep fitbit.db MyFitbitData.zip
+
 ## Browsing your data with Datasette
 
 Once you have imported Fitbit data into a SQLite database file you can browse your data using [Datasette](https://github.com/simonw/datasette). Install Datasette like so:

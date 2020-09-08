@@ -128,6 +128,33 @@ def save_exercise(db, zf, exercise):
         )
 
 
+def save_sleep(db, zf, sleep):
+    for filename in sleep:
+        sleep = json.load(zf.open(filename))
+        db["sleep"].upsert_all(
+            (
+                {
+                    "sleep_date": datetime.datetime.strptime(row["dateOfSleep"], "%Y-%m-%d").date(),
+                    "start_time": datetime.datetime.strptime(row["startTime"], "%Y-%m-%dT%H:%M:%S.%f"),
+                    "end_time": datetime.datetime.strptime(row["endTime"], "%Y-%m-%dT%H:%M:%S.%f"),
+                    "minutes_asleep": row["minutesAsleep"],
+                    "minutes_awake": row["minutesAwake"],
+                    "minutes_to_fall_asleep": row["minutesToFallAsleep"],
+                    "minutes_after_wakeup": row["minutesAfterWakeup"],
+                    "time_in_bed": row["timeInBed"],
+                    "efficiency": row["efficiency"],
+                    "type": row["type"],
+                    "wake_minutes": row["levels"]["summary"]["wake"]["minutes"] if row["type"] == "stages" else None,
+                    "light_minutes": row["levels"]["summary"]["light"]["minutes"] if row["type"] == "stages" else None,
+                    "deep_minutes": row["levels"]["summary"]["deep"]["minutes"] if row["type"] == "stages" else None,
+                    "rem_minutes": row["levels"]["summary"]["rem"]["minutes"] if row["type"] == "stages" else None
+                }
+                for row in sleep
+            ),
+            pk="sleep_date"
+        )
+
+
 def create_views(db):
     for name, sql in (
         (

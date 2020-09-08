@@ -123,3 +123,26 @@ def exercise(db_path, zip_path):
     ]
     with click.progressbar(exercise, label="Loading exercise data") as bar:
         utils.save_exercise(db, zf, bar)
+
+
+@cli.command(name="sleep")
+@click.argument(
+    "db_path",
+    type=click.Path(file_okay=True, dir_okay=False, allow_dash=False),
+    required=True,
+)
+@click.argument(
+    "zip_path",
+    type=click.Path(file_okay=True, dir_okay=False, allow_dash=False),
+    required=True,
+)
+def sleep(db_path, zip_path):
+    "Save data on Sleep from Takeout zip to SQLite"
+    db = sqlite_utils.Database(db_path)
+    zf = zipfile.ZipFile(zip_path)
+    # Find relevant sleep files
+    sleep = [
+        f.filename for f in zf.filelist if "sleep-" in f.filename
+    ]
+    with click.progressbar(sleep, label="Loading sleep data") as bar:
+        utils.save_sleep(db, zf, bar)
