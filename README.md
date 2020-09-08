@@ -1,5 +1,8 @@
 # fitbit-to-sqlite
 
+[![PyPI](https://img.shields.io/pypi/v/fitbit-to-sqlite.svg)](https://pypi.org/project/fitbit-to-sqlite/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/mrphil007/fitbit-to-sqlite/blob/master/LICENSE)
+
 Save data from Fitbit Takeout to an SQLite database.
 
 ## How to install
