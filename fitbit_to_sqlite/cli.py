@@ -146,3 +146,8 @@ def sleep(db_path, zip_path):
     ]
     with click.progressbar(sleep, label="Loading sleep data") as bar:
         utils.save_sleep(db, zf, bar)
+    # Also save the sleep scores which are in a separate CSV
+    sleep_scores = [
+        f.filename for f in zf.filelist if "sleep_score.csv" in f.filename
+    ]
+    utils.save_sleep_scores(db, zf, sleep_scores)

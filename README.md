@@ -29,7 +29,7 @@ You can import data on the distance you have travelled each minute of each day b
 
 ## Minutes Active
 
-You can import data on your activity minutes, which Fitbit classifies into `Sedentary`, `Lightly Active`, `Moderately Active` and `Very Active` using the following command. Note that this creates separate database tables for each, but are also combined together into a view for analysis called `minutes_active_v`.
+You can import data on your activity minutes, which Fitbit classifies into `Sedentary`, `Lightly Active`, `Moderately Active` and `Very Active` using the following command. Note that this creates separate database tables for each, but they are also combined together into a view for analysis called `minutes_active_v`.
 
     $ fitbit-to-sqlite minutes-active fitbit.db MyFitbitData.zip
 
@@ -41,13 +41,13 @@ You can import data on your exercise activities using the following command. Not
 
 ## Sleep
 
-You can import sleep log data using the following command. Note that some fields are only populated for sleep captured in `stages`.
+You can import sleep log data using the following command. Note that some fields are only populated for sleep captured in `stages`. A second table called `sleep_scores` is also created which includes the scores /100 which Fitbit have started generating.
 
     $ fitbit-to-sqlite sleep fitbit.db MyFitbitData.zip
 
 ## Browsing your data with Datasette
 
-Once you have imported Fitbit data into a SQLite database file you can browse your data using [Datasette](https://github.com/simonw/datasette). Install Datasette like so:
+Once you have imported Fitbit data into an SQLite database file you can browse your data using [Datasette](https://github.com/simonw/datasette). Install Datasette like so:
 
     $ pip install datasette
 

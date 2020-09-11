@@ -8,7 +8,7 @@ def test_sleep():
     zf = create_zip()
     db = sqlite_utils.Database(memory=True)
     sleep = [
-        f.filename for f in zf.filelist if "sleep" in f.filename
+        f.filename for f in zf.filelist if "sleep.json" in f.filename
     ]
     save_sleep(db, zf, sleep)
     sleep = list(sorted(db["sleep"].rows, key=lambda r: r["sleep_date"]))

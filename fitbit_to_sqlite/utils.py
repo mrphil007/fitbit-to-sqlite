@@ -1,4 +1,6 @@
 import json
+import csv
+from io import TextIOWrapper
 import datetime
 import sqlite_utils
 
@@ -152,6 +154,37 @@ def save_sleep(db, zf, sleep):
                 for row in sleep
             ),
             pk="sleep_date"
+        )
+
+
+def save_sleep_scores(db, zf, sleep_scores):
+    for filename in sleep_scores:
+        sleep_scores = csv.DictReader(TextIOWrapper(zf.open(filename)))
+        db["sleep_scores"].upsert_all(
+            (
+                {
+                    "sleep_date": datetime.datetime.strptime(row["timestamp"], "%Y-%m-%dT%H:%M:%SZ").date(),
+                    "overall_score": row["overall_score"],
+                    "composition_score": row["composition_score"],
+                    "revitalization_score": row["revitalization_score"],
+                    "duration_score": row["duration_score"],
+                    "deep_sleep_minutes": row["deep_sleep_in_minutes"],
+                    "resting_heart_rate": row["resting_heart_rate"],
+                    "restlessness": row["restlessness"]
+                }
+                for row in sleep_scores
+            ),
+            pk="sleep_date",
+            columns={
+                "sleep_date": str,
+                "overall_score": int,
+                "composition_score": int,
+                "revitalization_score": int,
+                "duration_score": int,
+                "deep_sleep_minutes": int,
+                "resting_heart_rate": int,
+                "restlessness": float
+            }
         )
 
 
