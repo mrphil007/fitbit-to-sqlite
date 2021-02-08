@@ -11,13 +11,15 @@ def save_resting_heart_rates(db, zf, heart_rates):
         db["resting_heart_rate"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S").date(),
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
                     "value": row["value"]["value"],
-                    "error": row["value"]["error"]
+                    "error": row["value"]["error"],
                 }
                 for row in heart_rate
             ),
-            pk="date"
+            pk="date",
         )
 
 
@@ -27,13 +29,15 @@ def save_distances(db, zf, distances):
         db["distance"].upsert_all(
             (
                 {
-                    "dateTime": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S"),
-                    "value": row["value"]
+                    "dateTime": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ),
+                    "value": row["value"],
                 }
                 for row in distance
             ),
             pk="dateTime",
-            columns={"dateTime": str, "value": int}
+            columns={"dateTime": str, "value": int},
         )
 
 
@@ -43,13 +47,15 @@ def save_sedentary_minutes(db, zf, sedentary_minutes):
         db["sedentary_minutes"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S").date(),
-                    "value": row["value"]
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "value": row["value"],
                 }
                 for row in sedentary_minutes
             ),
             pk="date",
-            columns={"date": str, "value": int}
+            columns={"date": str, "value": int},
         )
 
 
@@ -59,13 +65,15 @@ def save_lightly_active_minutes(db, zf, lightly_active_minutes):
         db["lightly_active_minutes"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S").date(),
-                    "value": row["value"]
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "value": row["value"],
                 }
                 for row in lightly_active_minutes
             ),
             pk="date",
-            columns={"date": str, "value": int}
+            columns={"date": str, "value": int},
         )
 
 
@@ -75,13 +83,15 @@ def save_moderately_active_minutes(db, zf, moderately_active_minutes):
         db["moderately_active_minutes"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S").date(),
-                    "value": row["value"]
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "value": row["value"],
                 }
                 for row in moderately_active_minutes
             ),
             pk="date",
-            columns={"date": str, "value": int}
+            columns={"date": str, "value": int},
         )
 
 
@@ -91,13 +101,15 @@ def save_very_active_minutes(db, zf, very_active_minutes):
         db["very_active_minutes"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["dateTime"], "%m/%d/%y %H:%M:%S").date(),
-                    "value": row["value"]
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "value": row["value"],
                 }
                 for row in very_active_minutes
             ),
             pk="date",
-            columns={"date": str, "value": int}
+            columns={"date": str, "value": int},
         )
 
 
@@ -107,26 +119,40 @@ def save_exercise(db, zf, exercise):
         db["exercise"].upsert_all(
             (
                 {
-                    "date": datetime.datetime.strptime(row["startTime"], "%m/%d/%y %H:%M:%S").date(),
-                    "start_time": datetime.datetime.strptime(row["startTime"], "%m/%d/%y %H:%M:%S"),
+                    "date": datetime.datetime.strptime(
+                        row["startTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "start_time": datetime.datetime.strptime(
+                        row["startTime"], "%m/%d/%y %H:%M:%S"
+                    ),
                     "activity_type": row["activityName"],
                     "log_type": row["logType"],
                     "duration": row["activeDuration"],
-                    "average_heart_rate": row["averageHeartRate"] if "averageHeartRate" in row else None,
+                    "average_heart_rate": row["averageHeartRate"]
+                    if "averageHeartRate" in row
+                    else None,
                     "steps": row["steps"] if "steps" in row else None,
                     "sedentary_minutes": row["activityLevel"][0]["minutes"],
                     "lightly_active_minutes": row["activityLevel"][1]["minutes"],
                     "fairly_active_minutes": row["activityLevel"][2]["minutes"],
                     "very_active_minutes": row["activityLevel"][3]["minutes"],
-                    "out_of_zones_minutes": row["heartRateZones"][0]["minutes"] if "heartRateZones" in row else None,
-                    "fat_burn_minutes": row["heartRateZones"][1]["minutes"] if "heartRateZones" in row else None,
-                    "cardio_minutes": row["heartRateZones"][2]["minutes"] if "heartRateZones" in row else None,
-                    "peak_minutes": row["heartRateZones"][3]["minutes"] if "heartRateZones" in row else None,
-                    "distance": row["distance"] if "distance" in row else None
+                    "out_of_zones_minutes": row["heartRateZones"][0]["minutes"]
+                    if "heartRateZones" in row
+                    else None,
+                    "fat_burn_minutes": row["heartRateZones"][1]["minutes"]
+                    if "heartRateZones" in row
+                    else None,
+                    "cardio_minutes": row["heartRateZones"][2]["minutes"]
+                    if "heartRateZones" in row
+                    else None,
+                    "peak_minutes": row["heartRateZones"][3]["minutes"]
+                    if "heartRateZones" in row
+                    else None,
+                    "distance": row["distance"] if "distance" in row else None,
                 }
                 for row in exercise
             ),
-            pk="start_time"
+            pk="start_time",
         )
 
 
@@ -136,9 +162,15 @@ def save_sleep(db, zf, sleep):
         db["sleep"].upsert_all(
             (
                 {
-                    "sleep_date": datetime.datetime.strptime(row["dateOfSleep"], "%Y-%m-%d").date(),
-                    "start_time": datetime.datetime.strptime(row["startTime"], "%Y-%m-%dT%H:%M:%S.%f"),
-                    "end_time": datetime.datetime.strptime(row["endTime"], "%Y-%m-%dT%H:%M:%S.%f"),
+                    "sleep_date": datetime.datetime.strptime(
+                        row["dateOfSleep"], "%Y-%m-%d"
+                    ).date(),
+                    "start_time": datetime.datetime.strptime(
+                        row["startTime"], "%Y-%m-%dT%H:%M:%S.%f"
+                    ),
+                    "end_time": datetime.datetime.strptime(
+                        row["endTime"], "%Y-%m-%dT%H:%M:%S.%f"
+                    ),
                     "minutes_asleep": row["minutesAsleep"],
                     "minutes_awake": row["minutesAwake"],
                     "minutes_to_fall_asleep": row["minutesToFallAsleep"],
@@ -146,14 +178,22 @@ def save_sleep(db, zf, sleep):
                     "time_in_bed": row["timeInBed"],
                     "efficiency": row["efficiency"],
                     "type": row["type"],
-                    "wake_minutes": row["levels"]["summary"]["wake"]["minutes"] if row["type"] == "stages" else None,
-                    "light_minutes": row["levels"]["summary"]["light"]["minutes"] if row["type"] == "stages" else None,
-                    "deep_minutes": row["levels"]["summary"]["deep"]["minutes"] if row["type"] == "stages" else None,
-                    "rem_minutes": row["levels"]["summary"]["rem"]["minutes"] if row["type"] == "stages" else None
+                    "wake_minutes": row["levels"]["summary"]["wake"]["minutes"]
+                    if row["type"] == "stages"
+                    else None,
+                    "light_minutes": row["levels"]["summary"]["light"]["minutes"]
+                    if row["type"] == "stages"
+                    else None,
+                    "deep_minutes": row["levels"]["summary"]["deep"]["minutes"]
+                    if row["type"] == "stages"
+                    else None,
+                    "rem_minutes": row["levels"]["summary"]["rem"]["minutes"]
+                    if row["type"] == "stages"
+                    else None,
                 }
                 for row in sleep
             ),
-            pk="sleep_date"
+            pk="sleep_date",
         )
 
 
@@ -163,14 +203,16 @@ def save_sleep_scores(db, zf, sleep_scores):
         db["sleep_scores"].upsert_all(
             (
                 {
-                    "sleep_date": datetime.datetime.strptime(row["timestamp"], "%Y-%m-%dT%H:%M:%SZ").date(),
+                    "sleep_date": datetime.datetime.strptime(
+                        row["timestamp"], "%Y-%m-%dT%H:%M:%SZ"
+                    ).date(),
                     "overall_score": row["overall_score"],
                     "composition_score": row["composition_score"],
                     "revitalization_score": row["revitalization_score"],
                     "duration_score": row["duration_score"],
                     "deep_sleep_minutes": row["deep_sleep_in_minutes"],
                     "resting_heart_rate": row["resting_heart_rate"],
-                    "restlessness": row["restlessness"]
+                    "restlessness": row["restlessness"],
                 }
                 for row in sleep_scores
             ),
@@ -183,8 +225,37 @@ def save_sleep_scores(db, zf, sleep_scores):
                 "duration_score": int,
                 "deep_sleep_minutes": int,
                 "resting_heart_rate": int,
-                "restlessness": float
-            }
+                "restlessness": float,
+            },
+        )
+
+
+def save_heart_rate_zones(db, zf, heart_rate_zones):
+    for filename in heart_rate_zones:
+        heart_rate_zones = json.load(zf.open(filename))
+        db["heart_rate_zones"].upsert_all(
+            (
+                {
+                    "date": datetime.datetime.strptime(
+                        row["dateTime"], "%m/%d/%y %H:%M:%S"
+                    ).date(),
+                    "below_zone_1": row["value"]["valuesInZones"][
+                        "BELOW_DEFAULT_ZONE_1"
+                    ],
+                    "in_zone_1": row["value"]["valuesInZones"]["IN_DEFAULT_ZONE_1"],
+                    "in_zone_2": row["value"]["valuesInZones"]["IN_DEFAULT_ZONE_2"],
+                    "in_zone_3": row["value"]["valuesInZones"]["IN_DEFAULT_ZONE_3"],
+                }
+                for row in heart_rate_zones
+            ),
+            pk="date",
+            columns={
+                "date": str,
+                "below_zone_1": int,
+                "in_zone_1": int,
+                "in_zone_2": int,
+                "in_zone_3": int,
+            },
         )
 
 
@@ -203,7 +274,6 @@ SELECT
 FROM
     distance d
             """,
-
         ),
         (
             "minutes_active_v",
